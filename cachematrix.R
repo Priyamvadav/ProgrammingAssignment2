@@ -1,15 +1,43 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This function creates a list, gets the matrix and then sets inverse, gets inverse etc.
+## 
 
-## Write a short comment describing this function
+## Inverse Matrix
 
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(x = matrix()) {original_matrix <<- x
+		inverse_matrix <<- NULL
+		set_matrix = function(z)
+		{	
+			original_matrix <<- z
+			inverse_matrix <<- NULL
+		}
+		get_matrix = function()
+		{
+			original_matrix
+		}
+		set_inverse = function(y = matrix())
+		{
+			inverse_matrix <<- y
+		}	
+		get_inverse = function()
+		{
+			inverse_matrix
+		}		
+		list( set_matrix = set_matrix, get_matrix = get_matrix, set_inverse = set_inverse, get_inverse = get_inverse)
 }
 
 
-## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
+## Checks if inverse is already calculated. If not it does it.
+
+cacheSolve <- function(x, ...) {if(!is.null(inverse_matrix))
+		{
+			message("Getting cached Inverse")
+		}
+		else
+		{	
+			message("Creating new Inverse")
+			inverse_matrix <<- solve(original_matrix)
+		}
+		inverse_matrix
         ## Return a matrix that is the inverse of 'x'
 }
